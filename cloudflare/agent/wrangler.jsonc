@@ -1,0 +1,16 @@
+{
+  "$schema": "../node_modules/wrangler/config-schema.json",
+  "keep_vars": true,
+  "name": "agentpilot-agent",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-11-13",
+  "compatibility_flags": ["nodejs_compat"],
+  "workers_dev": true,
+  "services": [{ "binding": "MCP_BROWSER", "service": "agentpilot-browser" }],
+  "durable_objects": {
+    "bindings": [{ "name": "RUN_COORDINATOR", "class_name": "RunCoordinator" }],
+  },
+  "migrations": [{ "tag": "v1", "new_sqlite_classes": ["RunCoordinator"] }],
+  "version_metadata": { "binding": "VERSION" },
+  "observability": { "enabled": true },
+}

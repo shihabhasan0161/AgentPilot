@@ -1,0 +1,26 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+.vscode/
+
+# Virtual environments
+venv
+
+# environment secrets
+.env
+
+# Cloudflare / Node local state and credentials
+node_modules/
+.wrangler/
+.dev.vars
+.dev.vars.*
+!.dev.vars.example
+.env.*
+!.env.example
+artifacts/
+coverage/

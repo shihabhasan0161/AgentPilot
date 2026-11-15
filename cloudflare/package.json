@@ -1,0 +1,41 @@
+{
+  "name": "agentpilot-cloudflare",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.18"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "dev": "wrangler dev --config browser/wrangler.jsonc --config agent/wrangler.jsonc",
+    "types": "wrangler types browser/worker-configuration.d.ts --include-runtime=false --config browser/wrangler.jsonc && wrangler types agent/worker-configuration.d.ts --include-runtime=false --config agent/wrangler.jsonc",
+    "build": "tsx scripts/build.ts",
+    "test:runtime": "tsx scripts/test-runtime.ts",
+    "deploy:browser": "wrangler deploy --config browser/wrangler.jsonc",
+    "deploy:agent": "wrangler deploy --config agent/wrangler.jsonc",
+    "check:mcp": "tsx scripts/check-mcp.ts",
+    "test:deployed:mcp": "tsx scripts/test-deployed-mcp.ts",
+    "test:deployed:agent": "tsx scripts/test-deployed-agent.ts",
+    "test:deployed:form": "tsx scripts/test-deployed-form.ts",
+    "verify:evidence": "tsx scripts/verify-evidence.ts"
+  },
+  "dependencies": {
+    "@cloudflare/playwright": "1.4.0",
+    "@modelcontextprotocol/client": "2.4.0",
+    "@modelcontextprotocol/sdk": "1.32.2",
+    "@modelcontextprotocol/server": "2.4.0",
+    "agents": "0.33.0",
+    "openai": "7.57.0",
+    "zod": "4.6.7"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "5.20261113.1",
+    "@types/node": "26.6.6",
+    "miniflare": "5.20261113.0-beta",
+    "tsx": "4.23.15",
+    "typescript": "7.0.2",
+    "vitest": "5.1.0",
+    "wrangler": "4.162.0"
+  }
+}

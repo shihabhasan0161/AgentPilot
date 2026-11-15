@@ -1,0 +1,57 @@
+name: Cloudflare AgentPilot
+on:
+  pull_request:
+    paths: ['cloudflare/**', '.github/workflows/cloudflare.yml']
+  push:
+    branches: [main]
+    paths: ['cloudflare/**', '.github/workflows/cloudflare.yml']
+  workflow_dispatch:
+    inputs:
+      deploy:
+        description: Deploy both Workers after verification
+        type: boolean
+        default: false
+permissions:
+  contents: read
+concurrency:
+  group: cloudflare-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: cloudflare
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: cloudflare/package-lock.json
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run build
+      - run: npm run test:runtime
+  deploy:
+    needs: verify
+    if: github.ref == 'refs/heads/main' && ((github.event_name == 'workflow_dispatch' && inputs.deploy) || (github.event_name == 'push' && vars.CLOUDFLARE_AUTO_DEPLOY == 'true'))
+    runs-on: ubuntu-latest
+    environment: cloudflare
+    defaults:
+      run:
+        working-directory: cloudflare
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: cloudflare/package-lock.json
+      - run: npm ci
+      - run: npm run deploy:browser
+      - run: npm run deploy:agent

@@ -1,0 +1,12 @@
+# These dependencies are only for the local python mcp project. (mcp/Cloudflare) built with Typescript.
+
+# (mcp/agent)
+openai-agents
+python-dotenv
+pydantic
+
+# (mcp/server)
+fastmcp>=4.1.8
+mcp
+playwright>=1.65.1
+python-dotenv

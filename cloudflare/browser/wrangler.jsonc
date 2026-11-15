@@ -1,0 +1,16 @@
+{
+  "$schema": "../node_modules/wrangler/config-schema.json",
+  "keep_vars": true,
+  "name": "agentpilot-browser",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-11-13",
+  "compatibility_flags": ["nodejs_compat"],
+  "workers_dev": true,
+  "browser": { "binding": "BROWSER", "remote": true },
+  "durable_objects": {
+    "bindings": [{ "name": "BROWSER_SESSION", "class_name": "BrowserSession" }],
+  },
+  "migrations": [{ "tag": "v1", "new_sqlite_classes": ["BrowserSession"] }],
+  "version_metadata": { "binding": "VERSION" },
+  "observability": { "enabled": true },
+}
