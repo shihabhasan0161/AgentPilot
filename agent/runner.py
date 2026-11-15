@@ -1,5 +1,5 @@
 """
-This the local Python MCP server agent, not the live deployed version. For the deployed version see mcp/cloudflare
+This the local Python MCP server agent, not the live deployed version. For the deployed version see /cloudflare
 
 Run one browser task through an existing Streamable HTTP MCP server.
 

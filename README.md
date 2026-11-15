@@ -10,8 +10,8 @@ The repository separates the local Python applications from the Cloudflare deplo
 
 | Folder | Purpose |
 | --- | --- |
-| [`server/`](server/README.md) | Local Python MCP server exposing Playwright browser tools. Kept separate so different MCP clients can use it without the AI runner. |
-| [`agent/`](agent/README.md) | Local Python AI runner that connects to the MCP server and carries out browser instructions using a model. |
+| `server` | Local Python MCP server exposing Playwright browser tools. Kept separate so different MCP clients can use it without the AI runner. |
+| `agent` | Local Python AI runner that connects to the MCP server and carries out browser instructions using a model. |
 | [`cloudflare/`](cloudflare/README.md) | Independent TypeScript cloud implementation containing the browser Worker, agent Worker, shared code, configuration, and verification scripts. Runs without the local Python applications or host computer. |
 | `tests/` | Standalone Python browser smoke test, separate from application code and Cloudflare tests. |
 | `.github/workflows/` | GitHub Actions configuration for verifying Cloudflare changes and optionally deploying both Workers. |

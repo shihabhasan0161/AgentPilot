@@ -1,5 +1,5 @@
 """
-This the local Python MCP server, not the live deployed version. For the deployed version see mcp/cloudflare
+This the local Python MCP server, not the live deployed version. For the deployed version see /cloudflare
 """
 
 import asyncio
